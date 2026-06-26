@@ -1,0 +1,7 @@
+*.xlsx
+*.csv
+*.xls
+*.parquet
+*.pkl
+data/
+datasets/
