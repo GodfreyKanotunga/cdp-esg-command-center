@@ -42,13 +42,13 @@ OLS regression with HC3 heteroskedasticity-robust standard errors across 8,331 s
 - Log Scope 1 emissions: β = −0.004, p = 0.614 (statistically insignificant once governance is controlled)
 - Strongest predictor: Reduction Initiatives (β = 1.40, adoption rate 93.9%)
 
-This finding is consistent with stakeholder and legitimacy theory — large emitters invest in disclosure quality under investor and regulatory pressure, but the governance structure, not emissions volume, drives score variation.
+This finding is consistent with stakeholder and legitimacy theory - large emitters invest in disclosure quality under investor and regulatory pressure, but the governance structure, not emissions volume, drives score variation.
 
 ---
 
 ## Methods
 
-### OLS Regression — Governance Transmission Model
+### OLS Regression - Governance Transmission Model
 Seven binary governance indicators regressed against CDP disclosure score. HC3 robust standard errors used throughout to account for heteroskedasticity. Results presented as β coefficients with adoption rates per indicator.
 
 | Governance Practice | Adoption Rate | β Coefficient |
@@ -81,7 +81,7 @@ Seven binary governance indicators regressed against CDP disclosure score. HC3 r
 
 The dashboard is a single self-contained HTML file with no external dependencies beyond Chart.js (loaded via CDN) and Google Fonts.
 
-- **ESG Risk Scorecard** — mean CDP score by year (2018–2021), trend, governance adoption rates, bivariate correlation, RF classification accuracy
+- **ESG Risk Scorecard** - mean CDP score by year (2018–2021), trend, governance adoption rates, bivariate correlation, RF classification accuracy
 - **Governance Transmission Model** - OLS β coefficients per governance practice with adoption rate bars
 - **Score Distribution and Panel Stats** - modal score, mean score, scored vs. total firm-years
 - **Top Countries by Mean CDP Score** - ranked list with score bars
