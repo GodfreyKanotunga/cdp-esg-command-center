@@ -82,22 +82,22 @@ Seven binary governance indicators regressed against CDP disclosure score. HC3 r
 The dashboard is a single self-contained HTML file with no external dependencies beyond Chart.js (loaded via CDN) and Google Fonts.
 
 - **ESG Risk Scorecard** — mean CDP score by year (2018–2021), trend, governance adoption rates, bivariate correlation, RF classification accuracy
-- **Governance Transmission Model** — OLS β coefficients per governance practice with adoption rate bars
-- **Score Distribution and Panel Stats** — modal score, mean score, scored vs. total firm-years
-- **Top Countries by Mean CDP Score** — ranked list with score bars
-- **Predictive Model Results** — RF, CART, and naive baseline accuracy comparison
-- **Adopter vs. Non-Adopter Score Gap** — mean score differential between governance adopters and non-adopters
-- **Emissions Profile Scope 1** — sector-level median tCO2e, top emitting sectors
-- **Score by Scope 1 Quartile** — inverted-U pattern visualisation
-- **ESG Transmission Framework** — network diagram mapping governance practices to CDP score through legitimacy and stakeholder theory pathways
+- **Governance Transmission Model** - OLS β coefficients per governance practice with adoption rate bars
+- **Score Distribution and Panel Stats** - modal score, mean score, scored vs. total firm-years
+- **Top Countries by Mean CDP Score** - ranked list with score bars
+- **Predictive Model Results** - RF, CART, and naive baseline accuracy comparison
+- **Adopter vs. Non-Adopter Score Gap** - mean score differential between governance adopters and non-adopters
+- **Emissions Profile Scope 1** - sector-level median tCO2e, top emitting sectors
+- **Score by Scope 1 Quartile** - inverted-U pattern visualisation
+- **ESG Transmission Framework** - network diagram mapping governance practices to CDP score through legitimacy and stakeholder theory pathways
 
 ---
 
 ## Limitations
 
 - OLS applied to an ordinal outcome (ordered logit recommended for robustness)
-- 50.9% of panel unscored — rates computed on scored subsample only
-- Cross-sectional design within years — causality not established
+- 50.9% of panel unscored - rates computed on scored subsample only
+- Cross-sectional design within years - causality not established
 - Bivariate correlation (+0.13) explained by stakeholder scrutiny of large emitters, not scale driving quality
 
 ---
