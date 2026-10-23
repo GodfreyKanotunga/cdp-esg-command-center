@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CDP Scores and Emission Cuts</title>
+<meta name="description" content="Do CDP climate scores go with real emission cuts? Same-period vs after-score tests on CDP Climate Change data, 2018-2021.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<style>html,body{margin:0;background:#080d1a}</style>
+<script>
+window.DASH_DATA={"bands": [{"measure": "After score: Scope 1+2", "band": "A / A-", "n": "139", "firms": "111", "median_pct": "-7.47", "share_cut_pct": "83.5"}, {"measure": "After score: Scope 1+2", "band": "B / B-", "n": "334", "firms": "270", "median_pct": "-5.51", "share_cut_pct": "76.0"}, {"measure": "After score: Scope 1+2", "band": "C / D", "n": "367", "firms": "291", "median_pct": "-5.44", "share_cut_pct": "73.3"}, {"measure": "Same period: Scope 1+2", "band": "A / A-", "n": "329", "firms": "246", "median_pct": "-6.69", "share_cut_pct": "78.4"}, {"measure": "Same period: Scope 1+2", "band": "B / B-", "n": "581", "firms": "429", "median_pct": "-4.51", "share_cut_pct": "71.9"}, {"measure": "Same period: Scope 1+2", "band": "C / D", "n": "593", "firms": "436", "median_pct": "-3.94", "share_cut_pct": "65.3"}, {"measure": "Same period: Scope 1 only", "band": "A / A-", "n": "339", "firms": "251", "median_pct": "-5.41", "share_cut_pct": "73.2"}, {"measure": "Same period: Scope 1 only", "band": "B / B-", "n": "601", "firms": "441", "median_pct": "-3.57", "share_cut_pct": "65.1"}, {"measure": "Same period: Scope 1 only", "band": "C / D", "n": "646", "firms": "474", "median_pct": "-2.62", "share_cut_pct": "59.0"}, {"measure": "Same period: two reports", "band": "A / A-", "n": "1546", "firms": "834", "median_pct": "-5.16", "share_cut_pct": "71.3"}, {"measure": "Same period: two reports", "band": "B / B-", "n": "1866", "firms": "1140", "median_pct": "-4.32", "share_cut_pct": "67.3"}, {"measure": "Same period: two reports", "band": "C / D", "n": "1613", "firms": "971", "median_pct": "-2.98", "share_cut_pct": "58.7"}], "models": [{"id": "lead|Average (OLS)|A / A-", "measure": "After score: Scope 1+2", "model": "Average (OLS)", "term": "A / A- vs C / D", "effect_pts": "0.55", "ci_low_pts": "-2.73", "ci_high_pts": "3.93", "p": "0.748", "n": "840", "firms": "598"}, {"id": "lead|Average (OLS)|B / B-", "measure": "After score: Scope 1+2", "model": "Average (OLS)", "term": "B / B- vs C / D", "effect_pts": "-0.62", "ci_low_pts": "-3.67", "ci_high_pts": "2.53", "p": "0.696", "n": "840", "firms": "598"}, {"id": "lead|Per grade step (OLS)|grade", "measure": "After score: Scope 1+2", "model": "Per grade step (OLS)", "term": "One grade higher", "effect_pts": "-0.2", "ci_low_pts": "-0.96", "ci_high_pts": "0.57", "p": "0.614", "n": "840", "firms": "598"}, {"id": "lead|Median regression|A / A-", "measure": "After score: Scope 1+2", "model": "Median regression", "term": "A / A- vs C / D", "effect_pts": "-1.32", "ci_low_pts": "-3.5", "ci_high_pts": "0.91", "p": "0.244", "n": "840", "firms": "598"}, {"id": "lead|Median regression|B / B-", "measure": "After score: Scope 1+2", "model": "Median regression", "term": "B / B- vs C / D", "effect_pts": "-0.66", "ci_low_pts": "-2.3", "ci_high_pts": "1.01", "p": "0.436", "n": "840", "firms": "598"}, {"id": "tot|Average (OLS)|A / A-", "measure": "Same period: Scope 1+2", "model": "Average (OLS)", "term": "A / A- vs C / D", "effect_pts": "-1.29", "ci_low_pts": "-3.64", "ci_high_pts": "1.11", "p": "0.29", "n": "1503", "firms": "902"}, {"id": "tot|Average (OLS)|B / B-", "measure": "Same period: Scope 1+2", "model": "Average (OLS)", "term": "B / B- vs C / D", "effect_pts": "-1.76", "ci_low_pts": "-3.96", "ci_high_pts": "0.49", "p": "0.125", "n": "1503", "firms": "902"}, {"id": "tot|Per grade step (OLS)|grade", "measure": "Same period: Scope 1+2", "model": "Per grade step (OLS)", "term": "One grade higher", "effect_pts": "-0.61", "ci_low_pts": "-1.17", "ci_high_pts": "-0.06", "p": "0.031", "n": "1503", "firms": "902"}, {"id": "tot|Median regression|A / A-", "measure": "Same period: Scope 1+2", "model": "Median regression", "term": "A / A- vs C / D", "effect_pts": "-1.16", "ci_low_pts": "-2.65", "ci_high_pts": "0.35", "p": "0.131", "n": "1503", "firms": "902"}, {"id": "tot|Median regression|B / B-", "measure": "Same period: Scope 1+2", "model": "Median regression", "term": "B / B- vs C / D", "effect_pts": "-1.26", "ci_low_pts": "-2.49", "ci_high_pts": "-0.0", "p": "0.05", "n": "1503", "firms": "902"}, {"id": "s1|Average (OLS)|A / A-", "measure": "Same period: Scope 1 only", "model": "Average (OLS)", "term": "A / A- vs C / D", "effect_pts": "-2.45", "ci_low_pts": "-6.13", "ci_high_pts": "1.38", "p": "0.207", "n": "1586", "firms": "945"}, {"id": "s1|Average (OLS)|B / B-", "measure": "Same period: Scope 1 only", "model": "Average (OLS)", "term": "B / B- vs C / D", "effect_pts": "-1.05", "ci_low_pts": "-4.6", "ci_high_pts": "2.63", "p": "0.571", "n": "1586", "firms": "945"}, {"id": "s1|Per grade step (OLS)|grade", "measure": "Same period: Scope 1 only", "model": "Per grade step (OLS)", "term": "One grade higher", "effect_pts": "-0.62", "ci_low_pts": "-1.65", "ci_high_pts": "0.42", "p": "0.241", "n": "1586", "firms": "945"}, {"id": "s1|Median regression|A / A-", "measure": "Same period: Scope 1 only", "model": "Median regression", "term": "A / A- vs C / D", "effect_pts": "-1.8", "ci_low_pts": "-3.49", "ci_high_pts": "-0.08", "p": "0.04", "n": "1586", "firms": "945"}, {"id": "s1|Median regression|B / B-", "measure": "Same period: Scope 1 only", "model": "Median regression", "term": "B / B- vs C / D", "effect_pts": "-1.1", "ci_low_pts": "-2.51", "ci_high_pts": "0.33", "p": "0.131", "n": "1586", "firms": "945"}, {"id": "cross|Average (OLS)|A / A-", "measure": "Same period: two reports", "model": "Average (OLS)", "term": "A / A- vs C / D", "effect_pts": "-2.22", "ci_low_pts": "-3.93", "ci_high_pts": "-0.48", "p": "0.012", "n": "5025", "firms": "2099"}, {"id": "cross|Average (OLS)|B / B-", "measure": "Same period: two reports", "model": "Average (OLS)", "term": "B / B- vs C / D", "effect_pts": "-2.31", "ci_low_pts": "-4.12", "ci_high_pts": "-0.48", "p": "0.014", "n": "5025", "firms": "2099"}, {"id": "cross|Per grade step (OLS)|grade", "measure": "Same period: two reports", "model": "Per grade step (OLS)", "term": "One grade higher", "effect_pts": "-0.68", "ci_low_pts": "-1.14", "ci_high_pts": "-0.22", "p": "0.004", "n": "5025", "firms": "2099"}, {"id": "cross|Median regression|A / A-", "measure": "Same period: two reports", "model": "Median regression", "term": "A / A- vs C / D", "effect_pts": "-0.77", "ci_low_pts": "-1.66", "ci_high_pts": "0.12", "p": "0.088", "n": "5025", "firms": "2099"}, {"id": "cross|Median regression|B / B-", "measure": "Same period: two reports", "model": "Median regression", "term": "B / B- vs C / D", "effect_pts": "-0.59", "ci_low_pts": "-1.42", "ci_high_pts": "0.25", "p": "0.166", "n": "5025", "firms": "2099"}], "byyear": [{"measure": "After score: Scope 1+2", "score_year": "2018", "band": "A / A-", "n": "58", "median_pct": "-4.93"}, {"measure": "After score: Scope 1+2", "score_year": "2018", "band": "B / B-", "n": "133", "median_pct": "-3.46"}, {"measure": "After score: Scope 1+2", "score_year": "2018", "band": "C / D", "n": "170", "median_pct": "-3.45"}, {"measure": "After score: Scope 1+2", "score_year": "2019", "band": "A / A-", "n": "81", "median_pct": "-11.56"}, {"measure": "After score: Scope 1+2", "score_year": "2019", "band": "B / B-", "n": "201", "median_pct": "-7.26"}, {"measure": "After score: Scope 1+2", "score_year": "2019", "band": "C / D", "n": "197", "median_pct": "-8.5"}, {"measure": "Same period: Scope 1+2", "score_year": "2018", "band": "A / A-", "n": "48", "median_pct": "-2.13"}, {"measure": "Same period: Scope 1+2", "score_year": "2018", "band": "B / B-", "n": "119", "median_pct": "-1.74"}, {"measure": "Same period: Scope 1+2", "score_year": "2018", "band": "C / D", "n": "140", "median_pct": "-1.66"}, {"measure": "Same period: Scope 1+2", "score_year": "2019", "band": "A / A-", "n": "89", "median_pct": "-5.04"}, {"measure": "Same period: Scope 1+2", "score_year": "2019", "band": "B / B-", "n": "226", "median_pct": "-4.29"}, {"measure": "Same period: Scope 1+2", "score_year": "2019", "band": "C / D", "n": "218", "median_pct": "-3.06"}, {"measure": "Same period: Scope 1+2", "score_year": "2020", "band": "A / A-", "n": "192", "median_pct": "-9.5"}, {"measure": "Same period: Scope 1+2", "score_year": "2020", "band": "B / B-", "n": "236", "median_pct": "-6.82"}, {"measure": "Same period: Scope 1+2", "score_year": "2020", "band": "C / D", "n": "235", "median_pct": "-8.28"}, {"measure": "Same period: Scope 1 only", "score_year": "2018", "band": "A / A-", "n": "50", "median_pct": "-0.89"}, {"measure": "Same period: Scope 1 only", "score_year": "2018", "band": "B / B-", "n": "125", "median_pct": "-1.67"}, {"measure": "Same period: Scope 1 only", "score_year": "2018", "band": "C / D", "n": "156", "median_pct": "0.0"}, {"measure": "Same period: Scope 1 only", "score_year": "2019", "band": "A / A-", "n": "93", "median_pct": "-4.03"}, {"measure": "Same period: Scope 1 only", "score_year": "2019", "band": "B / B-", "n": "236", "median_pct": "-2.3"}, {"measure": "Same period: Scope 1 only", "score_year": "2019", "band": "C / D", "n": "231", "median_pct": "-1.55"}, {"measure": "Same period: Scope 1 only", "score_year": "2020", "band": "A / A-", "n": "196", "median_pct": "-8.72"}, {"measure": "Same period: Scope 1 only", "score_year": "2020", "band": "B / B-", "n": "240", "median_pct": "-6.86"}, {"measure": "Same period: Scope 1 only", "score_year": "2020", "band": "C / D", "n": "259", "median_pct": "-6.76"}, {"measure": "Same period: two reports", "score_year": "2018", "band": "A / A-", "n": "357", "median_pct": "-1.8"}, {"measure": "Same period: two reports", "score_year": "2018", "band": "B / B-", "n": "497", "median_pct": "-1.64"}, {"measure": "Same period: two reports", "score_year": "2018", "band": "C / D", "n": "592", "median_pct": "-0.21"}, {"measure": "Same period: two reports", "score_year": "2019", "band": "A / A-", "n": "472", "median_pct": "-3.23"}, {"measure": "Same period: two reports", "score_year": "2019", "band": "B / B-", "n": "666", "median_pct": "-3.47"}, {"measure": "Same period: two reports", "score_year": "2019", "band": "C / D", "n": "532", "median_pct": "-1.77"}, {"measure": "Same period: two reports", "score_year": "2020", "band": "A / A-", "n": "717", "median_pct": "-8.97"}, {"measure": "Same period: two reports", "score_year": "2020", "band": "B / B-", "n": "703", "median_pct": "-8.09"}, {"measure": "Same period: two reports", "score_year": "2020", "band": "C / D", "n": "489", "median_pct": "-8.54"}], "funnel": [{"id": "lead1", "design": "After score", "order": "1", "step": "Investor scores given, 2018–2019", "n": "4464"}, {"id": "lead2", "design": "After score", "order": "2", "step": "Report two years later gives a clean change", "n": "1080"}, {"id": "lead3", "design": "After score", "order": "3", "step": "Change period starts after scores were released", "n": "955"}, {"id": "lead4", "design": "After score", "order": "4", "step": "Also has a sector (sample used)", "n": "840"}, {"id": "same1", "design": "Same period", "order": "1", "step": "Investor scores given, 2018–2020", "n": "7034"}, {"id": "same2", "design": "Same period", "order": "2", "step": "Next report gives a clean change", "n": "1635"}, {"id": "same3", "design": "Same period", "order": "3", "step": "Also has a sector (sample used)", "n": "1503"}], "quality": [{"id": "stab2018", "metric": "Score stability 2018→2019", "value": "0.8", "unit": "Spearman", "n": "1984"}, {"id": "stab2019", "metric": "Score stability 2019→2020", "value": "0.77", "unit": "Spearman", "n": "2177"}, {"id": "stab2020", "metric": "Score stability 2020→2021", "value": "0.78", "unit": "Spearman", "n": "2454"}, {"id": "rest_n", "metric": "Company-years reported in two files", "value": "3404.0", "unit": "count", "n": "3404"}, {"id": "rest_1", "metric": "Scope 1 later changed by more than 1%", "value": "39.0", "unit": "%", "n": "1327"}, {"id": "rest_50", "metric": "Scope 1 later changed by more than 50%", "value": "11.3", "unit": "%", "n": "385"}, {"id": "dec2018", "metric": "2019 reports whose year ends in 2018", "value": "68.5", "unit": "%", "n": "2649"}, {"id": "w_lo_lead", "metric": "Trim floor After score: Scope 1+2", "value": "-57.5", "unit": "%", "n": "0"}, {"id": "w_hi_lead", "metric": "Trim ceiling After score: Scope 1+2", "value": "62.4", "unit": "%", "n": "0"}, {"id": "w_lo_tot", "metric": "Trim floor Same period: Scope 1+2", "value": "-56.6", "unit": "%", "n": "0"}, {"id": "w_hi_tot", "metric": "Trim ceiling Same period: Scope 1+2", "value": "81.2", "unit": "%", "n": "0"}, {"id": "w_lo_s1", "metric": "Trim floor Same period: Scope 1 only", "value": "-76.4", "unit": "%", "n": "0"}, {"id": "w_hi_s1", "metric": "Trim ceiling Same period: Scope 1 only", "value": "257.4", "unit": "%", "n": "0"}, {"id": "w_lo_cross", "metric": "Trim floor Same period: two reports", "value": "-64.3", "unit": "%", "n": "0"}, {"id": "w_hi_cross", "metric": "Trim ceiling Same period: two reports", "value": "226.2", "unit": "%", "n": "0"}]};
+window.dash={data:function(id){return {status:'ok',data:window.DASH_DATA[id]||[]}},onData:function(fn){var run=function(){fn()};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();var t;window.addEventListener('resize',function(){clearTimeout(t);t=setTimeout(fn,150)})},colors:['#00d4aa','#4a9eff','#f5a623','#e8445a','#a855f7']};
+</script>
+</head><body>
+<style>
+
+.cc{--bg:#080d1a;--s1:#0d1525;--s2:#111d2e;--s3:#162238;--bd:rgba(255,255,255,.07);--bd2:rgba(255,255,255,.13);--green:#00d4aa;--amber:#f5a623;--red:#e8445a;--blue:#4a9eff;--purple:#a855f7;--tx:#e8edf5;--tx2:#8a9ab5;--tx3:#5b6b85;--sans:'Space Grotesk',system-ui,sans-serif;--mono:'Space Mono',ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;
+  background:var(--bg);color:var(--tx);font-family:var(--sans);font-size:13px;line-height:1.45;min-height:100vh}
+.cc *{box-sizing:border-box}
+.cc .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 20px;background:var(--s1);border-bottom:1px solid var(--bd2)}
+.cc .brand{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.cc .brand h1{margin:0;font-size:15px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green)}
+.cc .brand span{font-size:10px;color:var(--tx2);letter-spacing:.04em;text-transform:uppercase}
+.cc .pills{display:flex;gap:6px;flex-wrap:wrap}
+.cc .pill{padding:3px 9px;border-radius:100px;border:1px solid var(--bd2);font-size:10px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;font-family:var(--mono);white-space:nowrap}
+.cc .pg{background:rgba(0,212,170,.12);color:var(--green);border-color:rgba(0,212,170,.25)}
+.cc .pa{background:rgba(245,166,35,.12);color:var(--amber);border-color:rgba(245,166,35,.25)}
+.cc .pb{background:rgba(74,158,255,.12);color:var(--blue);border-color:rgba(74,158,255,.25)}
+.cc .pr{background:rgba(232,68,90,.12);color:var(--red);border-color:rgba(232,68,90,.25)}
+.cc .meta{font-size:10px;color:var(--tx3);text-align:right;line-height:1.5}
+.cc .exec{display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;padding:16px 20px;background:var(--s1);border-bottom:1px solid var(--bd)}
+.cc .tag{font-size:8px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--green);font-family:var(--mono);writing-mode:vertical-rl;transform:rotate(180deg)}
+.cc .exec h2{margin:0 0 6px;font-size:19px;font-weight:700;line-height:1.25;max-width:860px}
+.cc .exec h2 em,.cc .exec p em{font-style:normal;color:var(--green)}
+.cc .exec p{margin:0;font-size:12px;color:var(--tx2);line-height:1.6;max-width:800px}
+.cc .kpis{display:flex;flex-direction:column;gap:4px;align-items:flex-end}
+.cc .kv{font-size:26px;font-weight:700;color:var(--green);line-height:1;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.cc .kl{font-size:9px;color:var(--tx3);text-align:right;letter-spacing:.05em;text-transform:uppercase;margin-bottom:8px}
+.cc .row{display:grid;gap:1px;background:var(--bd)}
+.cc .r1{grid-template-columns:270px 1fr 1fr}
+.cc .r2{grid-template-columns:2fr 1fr}
+.cc .r3{grid-template-columns:1fr}
+.cc .r4{grid-template-columns:1fr 1fr 1fr}
+.cc .panel{background:var(--s1);padding:16px 18px;display:flex;flex-direction:column;gap:10px;min-width:0;position:relative}
+.cc .ph{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.cc .pt{font-size:9.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--tx2);line-height:1.2}
+.cc .pt i{font-style:normal;color:var(--green);margin-left:4px}
+.cc .badge{font-size:8.5px;font-family:var(--mono);padding:2px 6px;border-radius:3px;background:rgba(255,255,255,.05);color:var(--tx2);white-space:nowrap}
+.cc .sub{font-size:11px;color:var(--tx3);margin:0}
+.cc .scr{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 0;border-bottom:1px solid var(--bd)}
+.cc .scr:last-of-type{border-bottom:none}
+.cc .scl{font-size:11px;color:var(--tx2);flex:1;min-width:0}
+.cc .chip{font-size:10px;font-weight:600;font-family:var(--mono);padding:2px 7px;border-radius:3px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cc .cg{background:rgba(0,212,170,.15);color:var(--green)}
+.cc .ca{background:rgba(245,166,35,.15);color:var(--amber)}
+.cc .cr{background:rgba(232,68,90,.15);color:var(--red)}
+.cc .cb{background:rgba(74,158,255,.15);color:var(--blue)}
+.cc .insight{background:var(--s2);border-left:2px solid var(--green);border-radius:4px;padding:9px 11px;font-size:11px;color:var(--tx2);line-height:1.55}
+.cc .insight b{color:var(--tx);font-weight:600}
+.cc .insight.warn{border-left-color:var(--amber)}
+.cc .seg{display:flex;flex-wrap:wrap;gap:6px}
+.cc .seg button{font:inherit;font-family:var(--mono);font-size:9.5px;letter-spacing:.04em;text-transform:uppercase;padding:3px 9px;border-radius:100px;border:1px solid var(--bd2);background:transparent;color:var(--tx2);cursor:pointer}
+.cc .seg button[aria-pressed=true]{background:rgba(0,212,170,.12);color:var(--green);border-color:rgba(0,212,170,.35)}
+.cc .chart{min-height:200px;position:relative}
+.cc svg text{font-family:var(--mono)}
+.cc table{width:100%;border-collapse:collapse;font-size:11px;font-variant-numeric:tabular-nums}
+.cc th,.cc td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--bd);vertical-align:top}
+.cc th{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--tx3);font-weight:600;background:var(--s1);position:sticky;top:0}
+.cc td{color:var(--tx2)}
+.cc td.n,.cc th.n{text-align:right;font-family:var(--mono)}
+.cc td b{color:var(--green);font-weight:700}
+.cc td.neg{color:var(--green)} .cc td.pos{color:var(--red)}
+.cc .tbl{overflow-x:auto}
+.cc ul{margin:0;padding-left:16px;color:var(--tx2);font-size:11.5px;line-height:1.55}
+.cc li{margin-bottom:5px}
+.cc li::marker{color:var(--green)}
+.cc .tl{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.cc .tls{background:var(--s2);border-radius:4px;padding:9px 10px;border-top:2px solid var(--tx3);font-size:11px;color:var(--tx2);line-height:1.45}
+.cc .tls b{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--tx);margin-bottom:3px}
+.cc .tls.g{border-top-color:var(--blue)} .cc .tls.k{border-top-color:var(--green)}
+@media (max-width:700px){.cc .tl{grid-template-columns:1fr 1fr}}
+.cc .foot{padding:10px 20px;background:var(--s1);border-top:1px solid var(--bd2);font-size:10px;color:var(--tx3);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.cc .tip{position:absolute;pointer-events:none;background:var(--s3);border:1px solid var(--bd2);border-radius:4px;box-shadow:0 6px 20px rgba(0,0,0,.4);padding:6px 9px;font-size:11px;font-family:var(--mono);display:none;white-space:nowrap;z-index:5;color:var(--tx)}
+.cc .tip .k{color:var(--tx2);margin-bottom:2px}
+.cc .fail{display:flex;align-items:center;justify-content:center;gap:6px;min-height:inherit;color:var(--tx3);font-size:11px}
+.cc .fail::before{content:"";width:.375rem;height:.375rem;border-radius:50%;background:var(--red)}
+.cc [data-dash-source-state=empty]{color:transparent}
+.cc [data-dash-source-state=refreshing]{opacity:.5}
+@media (max-width:980px){.cc .r1,.cc .r2,.cc .r4{grid-template-columns:1fr}.cc .exec{grid-template-columns:1fr}.cc .tag{writing-mode:horizontal-tb;transform:none}.cc .kpis{align-items:flex-start}.cc .kl{text-align:left}.cc .meta{text-align:left}}
+@media (prefers-reduced-motion:no-preference){.cc .panel{animation:ccin .5s ease-out both}@keyframes ccin{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}}
+</style>
+<div class="cc" id="top">
+  <div class="topbar">
+    <div class="brand"><h1>CDP Score → Emission Cuts</h1><span>Revised analysis · Does a high score go with real cuts — before or after the score?</span></div>
+    <div class="pills">
+      <div class="pill pg">▲ CDP Climate Change</div>
+      <div class="pill pa">⚡ Scores 2018 – 2020</div>
+      <div class="pill pb">⬡ Emissions from 2019 – 2021 reports</div>
+      <div class="pill pr">⊕ After-score n = <span data-source="funnel" data-field="n" data-where="id=lead4" data-fmt="int">—</span></div>
+    </div>
+    <div class="meta">Godfrey M. Kanotunga &nbsp;|&nbsp; Clarkson University<br>MS Applied Data Science &nbsp;|&nbsp; Reh School of Business</div>
+  </div>
+
+  <div class="exec">
+    <div class="tag">Key Finding</div>
+    <div>
+      <h2>High CDP scorers were <em>already cutting</em> a bit more — but after the score is released, there is <em>no clear extra cut</em>.</h2>
+      <p><b style="color:var(--tx)">Same period</b> (the year the firm was being scored): each grade higher goes with <em data-source="models" data-field="effect_pts" data-where="id=tot%7CPer%20grade%20step%20(OLS)%7Cgrade" data-fmt="pts">—</em> points of change in Scope 1+2 (p = <span data-source="models" data-field="p" data-where="id=tot%7CPer%20grade%20step%20(OLS)%7Cgrade" data-fmt="p">—</span>). <b style="color:var(--tx)">After the score</b> (the year after it was released): <em data-source="models" data-field="effect_pts" data-where="id=lead%7CPer%20grade%20step%20(OLS)%7Cgrade" data-fmt="pts">—</em> points (p = <span data-source="models" data-field="p" data-where="id=lead%7CPer%20grade%20step%20(OLS)%7Cgrade" data-fmt="p">—</span>), 95% CI <span data-source="models" data-field="ci_low_pts" data-where="id=lead%7CPer%20grade%20step%20(OLS)%7Cgrade" data-fmt="pts">—</span> to <span data-source="models" data-field="ci_high_pts" data-where="id=lead%7CPer%20grade%20step%20(OLS)%7Cgrade" data-fmt="pts">—</span>. So the score describes firms that are cutting; we can't show it predicts further cuts. The after-score sample is smaller, so a small effect can't be ruled out either. Association only, not cause.</p>
+    </div>
+    <div class="kpis">
+      <div class="kv" data-source="models" data-field="effect_pts" data-where="id=tot%7CPer%20grade%20step%20(OLS)%7Cgrade" data-fmt="pts">—</div>
+      <div class="kl">Same period · pts per grade</div>
+      <div class="kv" style="color:var(--amber)" data-source="models" data-field="effect_pts" data-where="id=lead%7CPer%20grade%20step%20(OLS)%7Cgrade" data-fmt="pts">—</div>
+      <div class="kl">After score · pts per grade</div>
+    </div>
+  </div>
+
+  <div class="row r3">
+    <div class="panel">
+      <div class="ph"><div class="pt">Why timing matters<i>●</i></div><div class="badge">example: 2018 score</div></div>
+      <div class="tl">
+        <div class="tls"><b>2018 questionnaire</b>Firm reports its 2017 data. CDP scores these answers.</div>
+        <div class="tls"><b>Score released</b>The 2018 score is published around the turn of the year (late 2018 / early 2019).</div>
+        <div class="tls g"><b>2019 report → Same period</b>Shows 2018 vs 2017. Mostly before the score was out. <span data-source="quality" data-field="value" data-where="id=dec2018" data-fmt="pctu">—</span> of 2019 reports cover a year ending in 2018.</div>
+        <div class="tls k"><b>2020 report → After score</b>Shows 2019 vs 2018: the year after the score. Kept only if "Past year 1" ends on or after Dec 1 of the score year.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row r1">
+    <div class="panel">
+      <div class="ph"><div class="pt">Result Scorecard<i>●</i></div><div class="badge">pts = per grade, with controls</div></div>
+      <div class="scr"><div class="scl">After score · per grade</div><div class="chip ca" data-source="models" data-field="effect_pts" data-where="id=lead%7CPer%20grade%20step%20(OLS)%7Cgrade" data-fmt="pts">—</div></div>
+      <div class="scr"><div class="scl">After score · p-value</div><div class="chip ca" data-source="models" data-field="p" data-where="id=lead%7CPer%20grade%20step%20(OLS)%7Cgrade" data-fmt="pchip">—</div></div>
+      <div class="scr"><div class="scl">After score · A / A- vs C / D</div><div class="chip ca" data-source="models" data-field="effect_pts" data-where="id=lead%7CAverage%20(OLS)%7CA%20%2F%20A-" data-fmt="pts">—</div></div>
+      <div class="scr"><div class="scl">Same period · per grade</div><div class="chip cg" data-source="models" data-field="effect_pts" data-where="id=tot%7CPer%20grade%20step%20(OLS)%7Cgrade" data-fmt="pts">—</div></div>
+      <div class="scr"><div class="scl">Same period · p-value</div><div class="chip cg" data-source="models" data-field="p" data-where="id=tot%7CPer%20grade%20step%20(OLS)%7Cgrade" data-fmt="pchip">—</div></div>
+      <div class="scr"><div class="scl">Same period · two-report check</div><div class="chip cg" data-source="models" data-field="effect_pts" data-where="id=cross%7CPer%20grade%20step%20(OLS)%7Cgrade" data-fmt="pts">—</div></div>
+      <div class="scr"><div class="scl">Score stability 2019→2020</div><div class="chip cb" data-source="quality" data-field="value" data-where="id=stab2019" data-fmt="r2">—</div></div>
+      <div class="scr"><div class="scl">Scope 1 restated &gt;1%</div><div class="chip cr" data-source="quality" data-field="value" data-where="id=rest_1" data-fmt="pctu">—</div></div>
+      <div class="scr"><div class="scl">Causality</div><div class="chip ca">NOT SHOWN</div></div>
+      <div class="insight"><b>Reading it:</b> negative = emissions fell. "Points" = percentage points of yearly change, compared with C / D firms or per grade. Amber = not significant.</div>
+    </div>
+    <div class="panel">
+      <div class="ph"><div class="pt">Median yearly change<i>●</i></div><div class="badge">by score band</div></div>
+      <div class="seg" id="meas" role="group" aria-label="Measure"></div>
+      <div class="chart" id="c-median" data-source="bands"></div>
+      <p class="sub">Bars further left = bigger cut. Hover for counts.</p>
+    </div>
+    <div class="panel">
+      <div class="ph"><div class="pt">Share of firms that cut<i>●</i></div><div class="badge">same measure</div></div>
+      <div class="chart" id="c-share" data-source="bands"></div>
+      <p class="sub">Share with lower emissions than the year before.</p>
+    </div>
+  </div>
+
+  <div class="row r2">
+    <div class="panel">
+      <div class="ph"><div class="pt">Same pattern every year?<i>●</i></div><div class="badge">selected measure · median</div></div>
+      <div class="chart" id="c-year" data-source="byyear"></div>
+      <div class="insight warn"><b>Watch COVID.</b> Same period, score 2020 covers 2019→2020; after score, score 2019 covers 2019→2020 too. In those COVID years the order of the bands shifts (for Scope 1+2, C / D firms cut more than B / B-). Score year 2018 is the cleanest test.</div>
+    </div>
+    <div class="panel">
+      <div class="ph"><div class="pt">Sample funnel<i>●</i></div><div class="badge" id="fun-badge">company-years</div></div>
+      <div class="chart" id="c-funnel" data-source="funnel"></div>
+      <div class="insight warn"><b>Selection:</b> most scored firms drop out because the report has no clean pair of back-to-back years. The firms left may have steadier boundaries.</div>
+    </div>
+  </div>
+
+  <div class="row r3">
+    <div class="panel">
+      <div class="ph"><div class="pt">Model results<i>●</i></div><div class="badge">effect in pts vs C / D · 95% CI</div></div>
+      <p class="sub">OLS: sector + year controls, errors clustered by company, changes trimmed at 1st / 99th percentile. Median regression: sector + year controls. Green bold p = below 0.05.</p>
+      <div class="tbl"><table id="tbl-models" data-source="models" data-row-key="id">
+        <thead><tr><th data-field="measure">Measure</th><th data-field="model">Model</th><th data-field="term">Comparison</th><th class="n" data-field="effect_pts">Effect</th><th class="n" data-field="ci_low_pts">CI low</th><th class="n" data-field="ci_high_pts">CI high</th><th class="n" data-field="p">p</th><th class="n" data-field="n">Rows</th><th class="n" data-field="firms">Firms</th></tr></thead>
+        <tbody></tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="row r4">
+    <div class="panel">
+      <div class="ph"><div class="pt">Data quality<i>●</i></div><div class="badge">2018 – 2021 files</div></div>
+      <table id="tbl-quality" data-source="quality" data-row-key="id">
+        <thead><tr><th data-field="metric">Check</th><th class="n" data-field="value">Value</th><th class="n" data-field="n">Count</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="panel">
+      <div class="ph"><div class="pt">Limits<i style="color:var(--amber)">●</i></div></div>
+      <ul>
+        <li>Association only. Firms already planning cuts may also score well.</li>
+        <li>After-score sample is smaller (2 score years), so it can miss a small effect.</li>
+        <li>Sample leans to larger, well-organised reporters.</li>
+        <li>Changes can come from selling or buying business units, not real cuts.</li>
+        <li>2020 → 2021 includes COVID effects.</li>
+        <li>Scope 2 is location-based. Scope 3 is not used.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <div class="ph"><div class="pt">Method<i>●</i></div></div>
+      <ul>
+        <li>Same period: score year t = 2018 – 2020, change from report t+1. After score: t = 2018 – 2019, change from report t+2. Both use reporting year vs "Past year 1" (C6.1 + C6.3) inside one report.</li>
+        <li>Kept when the two periods end 335 – 395 days apart and both totals are above zero.</li>
+        <li>Change = log(current / previous), shown as %. Trimmed at 1st / 99th percentile, e.g. after score <span data-source="quality" data-field="value" data-where="id=w_lo_lead" data-fmt="pctv">—</span> to <span data-source="quality" data-field="value" data-where="id=w_hi_lead" data-fmt="pctv">—</span>.</li>
+        <li>Bands: A / A-, B / B-, C / D (incl. C-, D-). Grade step: A = 8 … D- = 1.</li>
+        <li>"Two reports": reporting-year total in report t+1 vs report t (same period, bigger sample, restatement noise).</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot"><span>Source: CDP Climate Change public responses &amp; CDP investor scores 2018 – 2021</span><span>October 2026 · CDP data not redistributed</span></div>
+  <div class="tip" id="tip"></div>
+</div>
+<script>
+(function(){
+const MEAS=['After score: Scope 1+2','Same period: Scope 1+2','Same period: Scope 1 only','Same period: two reports'];
+const BANDS=['A / A-','B / B-','C / D'];
+const BC={'A / A-':'#00d4aa','B / B-':'#4a9eff','C / D':'#f5a623'};
+const TX2='#8a9ab5',TX3='#5b6b85',GRID='rgba(255,255,255,.07)',AX='rgba(255,255,255,.18)';
+let cur=MEAS[0];
+const tip=document.getElementById('tip'),root=document.querySelector('.cc');
+const f1=v=>Math.abs(v)<0.05?'0.0':d3.format('+.1f')(v),fp=d3.format('.1f'),fi=d3.format(',');
+const FMT={pct:v=>f1(v)+'%',pctu:v=>fp(v)+'%',pctv:v=>f1(v)+'%',pts:v=>f1(v),p:v=>v.toFixed(3),pchip:v=>'p = '+v.toFixed(2),r2:v=>v.toFixed(2),int:v=>fi(v)};
+function showTip(ev,head,lines){tip.textContent='';const k=document.createElement('div');k.className='k';k.textContent=head;tip.appendChild(k);lines.forEach(l=>{const d=document.createElement('div');d.textContent=l;tip.appendChild(d)});tip.style.display='block';const r=root.getBoundingClientRect();let x=ev.clientX-r.left+12,y=ev.clientY-r.top+12;const w=tip.offsetWidth;if(x+w>r.width)x=Math.max(0,ev.clientX-r.left-w-12);tip.style.left=x+'px';tip.style.top=y+'px'}
+function hideTip(){tip.style.display='none'}
+function fail(el,st){el.textContent='';if(st==='error'||st==='connect'){const d=document.createElement('div');d.className='fail';d.textContent='Failed to load';el.appendChild(d)}}
+const seg=document.getElementById('meas');
+MEAS.forEach(m=>{const b=document.createElement('button');b.type='button';b.textContent=m;b.setAttribute('aria-pressed',m===cur);b.addEventListener('click',()=>{cur=m;seg.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x.textContent===cur));draw()});seg.appendChild(b)});
+function styleAxis(g){g.attr('font-size',null).attr('font-family',null);g.selectAll('text').attr('fill',TX3).style('font-size','10px');g.selectAll('line').attr('stroke',GRID);g.select('.domain').remove()}
+function fillMarks(){
+  document.querySelectorAll('.cc [data-fmt][data-source]').forEach(el=>{
+    const d=dash.data(el.getAttribute('data-source'));const p=new URLSearchParams(el.getAttribute('data-where'));
+    const r=d.status==='ok'?d.data.find(row=>[...p.entries()].every(([k,v])=>String(row[k])===v)):null;
+    const v=r?+r[el.getAttribute('data-field')]:NaN;el.textContent=r?FMT[el.getAttribute('data-fmt')](v):'—';
+  });
+}
+function hbar(el,rows,val,fmt,label,dom){
+  el.textContent='';const W=el.clientWidth||320,bh=30,gap=16,top=6,H=top+rows.length*(bh+gap)+22;
+  const svg=d3.select(el).append('svg').attr('width','100%').attr('viewBox',`0 0 ${W} ${H}`);
+  const tmp=svg.append('text').style('font-size','11px');let lw=0;rows.forEach(r=>{tmp.text(r.band);lw=Math.max(lw,tmp.node().getComputedTextLength())});tmp.remove();
+  const vals=rows.map(val);const t2=svg.append('text').style('font-size','12px').style('font-weight',700);let vw=0;vals.forEach(v=>{t2.text(fmt(v));vw=Math.max(vw,t2.node().getComputedTextLength())});t2.remove();
+  const L=lw+14,neg=d3.min(vals)<0,pos=d3.max(vals)>0;const L2=L+(neg?vw+10:0),R=pos?vw+12:12;
+  const x=d3.scaleLinear(dom||[Math.min(0,d3.min(vals)),Math.max(0,d3.max(vals))],[L2,W-R]);
+  const ax=svg.append('g').attr('transform',`translate(0,${H-18})`).call(d3.axisBottom(x).ticks(Math.max(2,Math.floor((W-L-R)/70))).tickSize(-(H-18-top+4)).tickFormat(d=>d+'%'));styleAxis(ax);
+  svg.append('line').attr('x1',x(0)).attr('x2',x(0)).attr('y1',top-4).attr('y2',H-18).attr('stroke',AX);
+  rows.forEach((r,i)=>{const y=top+i*(bh+gap),v=val(r),c=BC[r.band];
+    svg.append('text').attr('x',L-10).attr('y',y+bh/2).attr('dy','.35em').attr('text-anchor','end').attr('fill',TX2).style('font-size','11px').text(r.band);
+    const x0=Math.min(x(0),x(v)),w=Math.max(1,Math.abs(x(v)-x(0)));
+    svg.append('rect').attr('x',x0).attr('y',y).attr('width',w).attr('height',bh).attr('rx',3).attr('fill',c).attr('fill-opacity',.85)
+      .on('mousemove',ev=>showTip(ev,r.band,label(r))).on('mouseleave',hideTip);
+    svg.append('text').attr('x',v<0?x0-5:x0+w+5).attr('y',y+bh/2).attr('dy','.35em').attr('text-anchor',v<0?'end':'start').attr('fill',c).style('font-size','12px').style('font-weight',700).text(fmt(v));
+  });
+}
+function draw(){
+  const b=dash.data('bands'),m=dash.data('models'),y=dash.data('byyear'),f=dash.data('funnel'),q=dash.data('quality');
+  fillMarks();
+  const cm=document.getElementById('c-median'),cs=document.getElementById('c-share');
+  if(b.status==='ok'){const rows=BANDS.map(bd=>b.data.find(r=>r.measure===cur&&r.band===bd)).filter(Boolean);
+    hbar(cm,rows,r=>+r.median_pct,v=>f1(v)+'%',r=>[`Median ${f1(+r.median_pct)}%`,`${fi(+r.n)} company-years · ${fi(+r.firms)} firms`]);
+    hbar(cs,rows,r=>+r.share_cut_pct,v=>fp(v)+'%',r=>[`${fp(+r.share_cut_pct)}% cut emissions`,`${fi(+r.n)} company-years`],[0,100]);
+  } else {fail(cm,b.status);fail(cs,b.status)}
+  const cy=document.getElementById('c-year');
+  if(y.status==='ok'){cy.textContent='';const W=cy.clientWidth||320,H=230,T=22,B=30;
+    const yd=y.data.filter(r=>r.measure===cur).map(r=>Object.assign({},r,{change_year:'Score '+r.score_year}));
+    const yrs=[...new Set(yd.map(r=>r.change_year))];
+    const svg=d3.select(cy).append('svg').attr('width','100%').attr('viewBox',`0 0 ${W} ${H}`);
+    const ys=d3.scaleLinear([Math.min(0,d3.min(yd,r=>+r.median_pct)),Math.max(0,d3.max(yd,r=>+r.median_pct))],[H-B,T]).nice();
+    const tmp=svg.append('text').style('font-size','10px');let lw=0;ys.ticks(5).forEach(t=>{tmp.text(t+'%');lw=Math.max(lw,tmp.node().getComputedTextLength())});tmp.remove();
+    const L=lw+10,x0=d3.scaleBand(yrs,[L,W-4]).padding(.28),x1=d3.scaleBand(BANDS,[0,x0.bandwidth()]).padding(.14);
+    const ga=svg.append('g').attr('transform',`translate(${L},0)`).call(d3.axisLeft(ys).ticks(5).tickSize(-(W-L-4)).tickFormat(d=>d+'%'));styleAxis(ga);
+    svg.append('line').attr('x1',L).attr('x2',W-4).attr('y1',ys(0)).attr('y2',ys(0)).attr('stroke',AX);
+    yrs.forEach(yr=>svg.append('text').attr('x',x0(yr)+x0.bandwidth()/2).attr('y',T-8).attr('text-anchor','middle').attr('fill',TX2).style('font-size','10px').text(yr));
+    yd.forEach(r=>{const v=+r.median_pct,bw=Math.min(32,x1.bandwidth()),xx=x0(r.change_year)+x1(r.band)+(x1.bandwidth()-bw)/2;
+      svg.append('rect').attr('x',xx).attr('y',Math.min(ys(0),ys(v))).attr('width',bw).attr('height',Math.max(1,Math.abs(ys(v)-ys(0)))).attr('rx',3).attr('fill',BC[r.band]).attr('fill-opacity',.85)
+        .on('mousemove',ev=>showTip(ev,r.change_year+' · '+r.band,[`Median ${f1(v)}%`,`${fi(+r.n)} company-years`])).on('mouseleave',hideTip)});
+    let lx=L;BANDS.forEach(bd=>{const g=svg.append('g').attr('transform',`translate(${lx},${H-8})`);g.append('rect').attr('width',9).attr('height',9).attr('y',-8).attr('rx',2).attr('fill',BC[bd]);const t=g.append('text').attr('x',13).attr('fill',TX2).style('font-size','10px').text(bd);lx+=13+t.node().getComputedTextLength()+16});
+  } else fail(cy,y.status);
+  const cf=document.getElementById('c-funnel');
+  if(f.status==='ok'){cf.textContent='';const des=cur.startsWith('After')?'After score':'Same period';document.getElementById('fun-badge').textContent=des;const rows=f.data.filter(r=>r.design===des).sort((a,b)=>a.order-b.order);const W=cf.clientWidth||300,bh=20,step=60,H=rows.length*step;
+    const svg=d3.select(cf).append('svg').attr('width','100%').attr('viewBox',`0 0 ${W} ${H}`);const x=d3.scaleLinear([0,d3.max(rows,r=>+r.n)],[0,W-64]);
+    rows.forEach((r,i)=>{const yy=i*step,c=i===rows.length-1?'#00d4aa':'#4a9eff';
+      svg.append('text').attr('x',0).attr('y',yy+12).attr('fill',TX2).style('font-size','10px').style('font-family','var(--sans)').text(r.step);
+      svg.append('rect').attr('x',0).attr('y',yy+20).attr('width',Math.max(2,x(+r.n))).attr('height',bh).attr('rx',3).attr('fill',c).attr('fill-opacity',i===rows.length-1?.9:.45)
+        .on('mousemove',ev=>showTip(ev,r.step,[fi(+r.n)+' company-years',(100*r.n/rows[0].n).toFixed(1)+'% of scored'])).on('mouseleave',hideTip);
+      svg.append('text').attr('x',x(+r.n)+6).attr('y',yy+20+bh/2).attr('dy','.35em').attr('fill',c).style('font-size','11px').style('font-weight',700).text(fi(+r.n))});
+  } else fail(cf,f.status);
+  const tb=document.querySelector('#tbl-models tbody');tb.textContent='';
+  if(m.status==='ok'){m.data.forEach(r=>{const tr=document.createElement('tr');tr.setAttribute('data-key',r.id);
+    [[r.measure],[r.model],[r.term],[f1(+r.effect_pts),'n '+(+r.effect_pts<0?'neg':'pos')],[f1(+r.ci_low_pts),'n'],[f1(+r.ci_high_pts),'n'],[(+r.p).toFixed(3),'n',+r.p<0.05],[fi(+r.n),'n'],[fi(+r.firms),'n']].forEach(([t,c,s])=>{const td=document.createElement('td');if(c)td.className=c;if(s){const bb=document.createElement('b');bb.textContent=t;td.appendChild(bb)}else td.textContent=t;tr.appendChild(td)});tb.appendChild(tr)})}
+  const tq=document.querySelector('#tbl-quality tbody');tq.textContent='';
+  if(q.status==='ok'){q.data.filter(r=>!r.id.startsWith('w_')).forEach(r=>{const tr=document.createElement('tr');tr.setAttribute('data-key',r.id);
+    const v=r.unit==='%'?fp(+r.value)+'%':r.unit==='count'?fi(+r.value):(+r.value).toFixed(2);
+    [[r.metric],[v,'n'],[fi(+r.n),'n']].forEach(([t,c])=>{const td=document.createElement('td');if(c)td.className=c;td.textContent=t;tr.appendChild(td)});tq.appendChild(tr)})}
+}
+dash.onData(draw);
+})();
+</script>
+
+</body></html>

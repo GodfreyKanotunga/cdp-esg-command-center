@@ -1,123 +1,54 @@
-# CDP ESG Command Center
+# CDP Scores and Emission Cuts
 
-**Author:** Godfrey M. Kanotunga  
-**Role:** Graduate Research Assistant, Clarkson University  
-**Supervisor:** Professor Santosh Mahapatra, Reh School of Business  
-**Data:** CDP Climate Change Public Disclosure, 2018–2021  
+**Author:** Godfrey M. Kanotunga
+**Affiliation:** MS Applied Data Science, Reh School of Business, Clarkson University
+**Supervisor:** Professor Santosh Mahapatra
+**Data:** CDP Climate Change public responses 2018–2021 and CDP investor scores 2018–2020
 
----
-
-## Overview
-
-The CDP ESG Command Center is an institutional climate disclosure analytics dashboard built on a four-year longitudinal panel dataset. It synthesises statistical modelling, machine learning classification, and emissions analysis into a single, self-contained HTML dashboard designed for academic research and ESG portfolio applications.
-
-The central research question addressed is whether corporate governance practices or emissions scale better explain the quality of CDP climate disclosure scores. The answer, supported by multiple methods, is governance.
+**Live dashboard:** https://godfreykanotunga.github.io/cdp-esg-command-center/
 
 ---
 
-## Dataset
+## Question
 
-| Attribute | Detail |
-|---|---|
-| Source | CDP Climate Change Public Questionnaire |
-| Years covered | 2018, 2019, 2020, 2021 |
-| Total firm-years | 16,957 |
-| Countries | 108 |
-| Sectors | 61 |
-| Join key | account_id |
-| Scored firm-years | 8,331 (49.1% of panel) |
+Do companies with higher CDP climate scores actually cut their emissions — and does a high score come **before** the cuts, or just describe firms that were already cutting?
 
-The master analytical file (`CDP_2018_2021_Master_v2.xlsx`) was constructed through a full ETL pipeline: multi-year flat file extraction, column-intersection harmonisation across question naming conventions, and panel assembly via account_id.
+## Key finding
 
----
+- **Same period** (the year the firm was being scored): each grade higher goes with about **0.6 percentage points** more cut in Scope 1+2 emissions (p = 0.031, sector and year controls).
+- **After the score** (the year after it was released): **−0.2 points** per grade (p = 0.61, 95% CI −1.0 to +0.6).
+- **Reading:** high scorers were already cutting a bit more, but there is no clear evidence of extra cuts after the score is published. The after-score sample is smaller (840 company-years), so a small effect cannot be ruled out. This is an association, not a causal effect.
 
-## Key Finding
+## Why timing matters
 
-> **Governance practices explain 31% of variation in CDP disclosure scores. Emissions size does not.**
+A CDP score for year *t* is based on the questionnaire answered in *t*, which reports the previous year's data. Most firms in the 2019 file (68.5%) report a year that ends in 2018. So comparing a 2018 score with the change in the 2019 report measures the **same period** the firm was scored on. The **after-score** test compares the 2018 score with the change in the 2020 report (2019 vs 2018), and the 2019 score with the 2021 report, keeping only rows where the measured year starts after the scores were released.
 
-OLS regression with HC3 heteroskedasticity-robust standard errors across 8,331 scored firm-years:
+## Method
 
-- R² = 0.31
-- Seven binary governance indicators included as predictors
-- Log Scope 1 emissions: β = −0.004, p = 0.614 (statistically insignificant once governance is controlled)
-- Strongest predictor: Reduction Initiatives (β = 1.40, adoption rate 93.9%)
+- Emissions change is read **inside one report**: reporting year vs "Past year 1" (C6.1 Scope 1 + C6.3 Scope 2 location-based). This avoids bias from later restatements (39% of Scope 1 figures change by more than 1% in a later file).
+- Kept only when the two periods end 335–395 days apart and both totals are above zero.
+- Change = log(current / previous), shown as a percentage; trimmed at the 1st and 99th percentile.
+- Score bands: A / A-, B / B-, C / D (incl. C-, D-). Grade step: A = 8 … D- = 1.
+- Models: OLS with sector and year controls, standard errors clustered by company; median regression with sector and year controls.
+- Robustness: Scope 1 only, and reporting-year totals compared across two reports.
+- Every number was recomputed by a second, independent script from the original files.
 
-This finding is consistent with stakeholder and legitimacy theory - large emitters invest in disclosure quality under investor and regulatory pressure, but the governance structure, not emissions volume, drives score variation.
+## Limits
 
----
-
-## Methods
-
-### OLS Regression - Governance Transmission Model
-Seven binary governance indicators regressed against CDP disclosure score. HC3 robust standard errors used throughout to account for heteroskedasticity. Results presented as β coefficients with adoption rates per indicator.
-
-| Governance Practice | Adoption Rate | β Coefficient |
-|---|---|---|
-| Reduction Initiatives | 93.9% | 1.40 |
-| Emissions Target | 86.1% | 1.14 |
-| Board Oversight | 96.4% | 0.90 |
-| Value Chain Engagement | 31.6% | 0.78 |
-| Climate Risks | 87.3% | 0.50 |
-| Climate Opportunities | 98.6% | 0.43 |
-| Internal Carbon Price | 24.2% | 0.40 |
-
-### Random Forest Classification
-- 200 trees, max depth 8
-- 5-fold cross-validation, 3-class target (Low / Mid / High scorer)
-- Accuracy: 54.9% vs. 33.3% naive baseline
-
-### CART Decision Tree
-- Max depth 5
-- Accuracy: 54.4%
-
-### Scope 1 Emissions ANOVA
-- Inverted-U pattern across emissions quartiles (Q1: 5.35, Q2: 5.78, Q3 peak: 5.94, Q4: 5.74)
-- F = 33.4, p < 0.001
-- Consistent with selection effect: mid-range emitters face highest scrutiny
-
----
-
-## Dashboard Sections
-
-The dashboard is a single self-contained HTML file with no external dependencies beyond Chart.js (loaded via CDN) and Google Fonts.
-
-- **ESG Risk Scorecard** - mean CDP score by year (2018–2021), trend, governance adoption rates, bivariate correlation, RF classification accuracy
-- **Governance Transmission Model** - OLS β coefficients per governance practice with adoption rate bars
-- **Score Distribution and Panel Stats** - modal score, mean score, scored vs. total firm-years
-- **Top Countries by Mean CDP Score** - ranked list with score bars
-- **Predictive Model Results** - RF, CART, and naive baseline accuracy comparison
-- **Adopter vs. Non-Adopter Score Gap** - mean score differential between governance adopters and non-adopters
-- **Emissions Profile Scope 1** - sector-level median tCO2e, top emitting sectors
-- **Score by Scope 1 Quartile** - inverted-U pattern visualisation
-- **ESG Transmission Framework** - network diagram mapping governance practices to CDP score through legitimacy and stakeholder theory pathways
-
----
-
-## Limitations
-
-- OLS applied to an ordinal outcome (ordered logit recommended for robustness)
-- 50.9% of panel unscored - rates computed on scored subsample only
-- Cross-sectional design within years - causality not established
-- Bivariate correlation (+0.13) explained by stakeholder scrutiny of large emitters, not scale driving quality
-
----
-
-## How to Use
-
-Open `CDP_ESG_Command_Center_v3.html` in any modern browser. No installation or dependencies required. The file is fully self-contained.
-
----
+- Association only; firms planning cuts may also score well.
+- Only firms reporting two back-to-back years in one report are included, which leans toward larger, well-organised reporters.
+- Changes can reflect acquisitions or divestments, not real cuts.
+- 2019→2020 changes include COVID effects; the 2018 score year is the cleanest test.
+- Scope 3 is not used.
 
 ## Files
 
 | File | Description |
 |---|---|
-| `CDP_ESG_Command_Center_v3.html` | Interactive analytics dashboard |
+| `index.html` | Interactive dashboard (self-contained; loads d3 and Google Fonts from CDNs) |
 
-The master analytical file (`CDP_2018_2021_Master_v2.xlsx`) is not included in this repository. The dataset was constructed from CDP Climate Change public disclosures and is available on request.
+The CDP source files are not included in this repository.
 
 ---
 
-## Disclaimer
-
-Academic research for educational and portfolio purposes only. Data sourced from CDP public disclosures. Not investment advice. Sources: CDP, IMF, World Bank, Bloomberg.
+Academic research for educational purposes only. Not investment advice.
